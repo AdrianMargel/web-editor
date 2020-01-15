@@ -206,7 +206,6 @@ html{
     border: 2px solid #87B569;
 }
 
-
 .spawner{
     width: 200px;
     height: 100px;
@@ -228,7 +227,7 @@ html{
     height: 100px;
     width: 400px;
 }
-.optionsIcon{
+.options{
     width: 30px;
     height: 30px;
     position: absolute;
@@ -237,6 +236,8 @@ html{
 
     background: url("../img/options.png");
     background-size: cover;
+
+    cursor: pointer;
 }
 
 .selected{
@@ -279,7 +280,17 @@ html{
     stroke-width:3;
 }
 
-
+.optionEdit{
+    position: absolute;
+    right: 0;
+    width: 500px;
+    height: 100px;
+    background-color: red;
+}
+.editHTML{
+    background-color: red;
+    color: black;
+}
 
 
 

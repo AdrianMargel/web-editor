@@ -30,6 +30,12 @@
   <div class="drag">5</div>
   <div class="drag">6</div> -->
   <section></section>
+  <div class="optionEdit" style="visibility:hidden;">
+    <p>Edit HTML:</p>
+    <textarea class="editHTML"></textarea>
+    <button class="saveOption" onclick="saveOption(this)">Save</button>
+    <button class="cancelOption" onclick="closeOptions()">Cancel</button>
+  </div>
   <div class="editor">
     <div class="editBack">
     </div>
@@ -47,7 +53,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
       <div class="spawner">
         <div class="stuff">TEST 2</div>
@@ -60,7 +66,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
       <div class="spawner">
         <div class="stuff">TEST 3</div>
@@ -73,7 +79,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
       <div class="spawner">
         <div class="stuff">TEST 4</div>
@@ -86,7 +92,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
       <div class="spawner">
         <div class="stuff">TEST 5</div>
@@ -99,7 +105,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
       <div class="spawner">
         <div class="stuff">TEST 6</div>
@@ -112,7 +118,7 @@
         <div class="resizeNodeLT resizer"></div>
         <div class="resizeNodeRB resizer"></div>
         <div class="resizeNodeLB resizer"></div>
-        <div class="displayFocus optionsIcon"></div>
+        <div class="displayFocus options"></div>
       </div>
     </div>
     <div class="editFront">

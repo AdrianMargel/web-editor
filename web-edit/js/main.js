@@ -1,4 +1,6 @@
 
+//TODO: should not be able to delete spawners
+
 class Element {
   constructor(elmnt) {
 
@@ -21,7 +23,7 @@ class Element {
     this.animating=0;
     this.initialX=this.x;
     this.initialY=this.y;
-    var i=0;
+    let i=0;
     var allResizers=elmnt.getElementsByClassName("resizer");
 
     for(i = 0; i<allResizers.length; i++){
@@ -31,6 +33,15 @@ class Element {
         this.tracker.resizeGrab(this);
       });
     }
+
+    var allOptions=elmnt.getElementsByClassName("options");
+    for(i = 0; i<allOptions.length; i++){
+      allOptions[i].tracker=this;
+      allOptions[i].addEventListener("mousedown", function (event) {
+        this.tracker.openOption(this);
+      });
+    }
+
   }
   setPos(setX,setY){
     this.x=setX;
@@ -216,6 +227,9 @@ class Element {
       }
     }
   }
+  openOption(option){
+    openOption(this);
+  }
 }
 class Spawner{
   constructor(elmnt) {
@@ -267,6 +281,7 @@ class Spawner{
 }
 
 function defocus(){
+  document.activeElement.blur();
   var i;
   for (i = 0; i < dragE.length; i++) {
     if(dragE[i].grabClick!=clickNum){
@@ -339,23 +354,50 @@ document.onmousemove = drag;
 document.onscroll = scroll;
 document.onmousedown =
   function(e) {
-    e.preventDefault();
-    defocus();
-    clickNum++;
+    if(inEditor(e.target)){
+      e.preventDefault();
+      defocus();
+      clickNum++;
+    }
     //console.log(clickNum);
   };
 document.onmouseup = mouseUp;
 
 document.onkeydown = function(evt) {
-    evt = evt || window.event;
+  evt = evt || window.event;
+  if(evt.target==document.getElementsByTagName("BODY")[0]){
     if (evt.keyCode == 8||evt.keyCode == 46) {
         deleteSelected();
     }
+  }
 };
+
+function inEditor(target){
+  let search=target;
+
+  let editors=document.getElementsByClassName("editor");
+  let inEditor=false;
+  while(!inEditor&&search!=null){
+    let i;
+    for(i=0;i<editors.length;i++){
+      if(search==editors[i]){
+        inEditor=true;
+        break;
+      }
+    }
+    if(!inEditor){
+      search=search.parentElement;
+    }
+  }
+
+  return inEditor;
+}
 
 function deleteSelected(){
   let i;
   let j;
+
+  let opt = document.getElementsByClassName("optionEdit")[0];
 
   for (i = dragE.length-1; i >=0; i--) {
     if(dragE[i].grabClick==clickNum-1&&clickNum!=0){
@@ -365,10 +407,37 @@ function deleteSelected(){
           break;
         }
       }
+      if(opt.target==dragE[i]){
+        closeOptions();
+      }
       dragE.splice(i,1);
     }
   }
   removeOutline();
+}
+
+function openOption(target){
+  let i;
+  let opt = document.getElementsByClassName("optionEdit")[0];
+  opt.target=target;
+  opt.style.visibility="visible";
+
+  let toSet=opt.getElementsByClassName("editHTML")[0];
+  toSet.value=target.elmnt.getElementsByClassName("stuff")[0].innerHTML;
+}
+
+function saveOption(toSave){
+  let toSet=toSave.parentNode.getElementsByClassName("editHTML")[0];
+  let toChange=toSave.parentNode.target.elmnt.getElementsByClassName("stuff")[0];
+  toChange.innerHTML=toSet.value;
+}
+function closeOptions(){
+  let i;
+  let opts=document.getElementsByClassName("optionEdit");
+  for (i = opts.length-1; i >=0; i--) {
+    opts[i].target=null;
+    opts[i].style.visibility="hidden";
+  }
 }
 
 function drag(e) {
@@ -425,7 +494,6 @@ function setOutline(x,y,w,h){
   }
 }
 function removeOutline(){
-  console.log(allOutline);
   let i=0;
   for (i = 0; i < allOutline.length; i++) {
     allOutline[i].style.visibility="hidden";
