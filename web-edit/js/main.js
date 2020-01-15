@@ -111,6 +111,7 @@ class Element {
           this.setPos(this.elmnt.spawner.x,this.elmnt.spawner.y);
         }else{
           this.elmnt.parentNode.removeChild(this.elmnt);
+          removeOutline();
         }
       }
     }
@@ -344,6 +345,31 @@ document.onmousedown =
   };
 document.onmouseup = mouseUp;
 
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 8||evt.keyCode == 46) {
+        deleteSelected();
+    }
+};
+
+function deleteSelected(){
+  let i;
+  let j;
+
+  for (i = dragE.length-1; i >=0; i--) {
+    if(dragE[i].grabClick==clickNum-1&&clickNum!=0){
+      for (j = 0; j < allDrag.length; j++) {
+        if(dragE[i].elmnt==allDrag[j]){
+          allDrag[j].parentNode.removeChild(allDrag[j]);
+          break;
+        }
+      }
+      dragE.splice(i,1);
+    }
+  }
+  removeOutline();
+}
+
 function drag(e) {
 
   e = e || window.event;
@@ -382,6 +408,8 @@ function mouseUp(){
 function setOutline(x,y,w,h){
   let i=0;
   for (i = 0; i < allOutline.length; i++) {
+    allOutline[i].style.visibility="visible";
+
     var rx=Math.round(x/gridSize)*gridSize;
     var ry=Math.round(y/gridSize)*gridSize;
 
@@ -393,6 +421,13 @@ function setOutline(x,y,w,h){
 
     allOutline[i].style.height = rh + "px";
     allOutline[i].style.width = rw + "px";
+  }
+}
+function removeOutline(){
+  console.log(allOutline);
+  let i=0;
+  for (i = 0; i < allOutline.length; i++) {
+    allOutline[i].style.visibility="hidden";
   }
 }
 
