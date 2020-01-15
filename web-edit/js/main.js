@@ -109,6 +109,7 @@ class Element {
         if(this.elmnt.spawner!=undefined&&this.elmnt.spawner!=null){
           this.elmnt.style.zIndex="1";
           this.setPos(this.elmnt.spawner.x,this.elmnt.spawner.y);
+          removeOutline();
         }else{
           this.elmnt.parentNode.removeChild(this.elmnt);
           removeOutline();
