@@ -239,6 +239,10 @@ html{
 
     cursor: pointer;
 }
+.options:hover{
+    background: url("../img/options2.png");
+    background-size: cover;
+}
 
 .selected{
     border: 1px dashed #87B569;
@@ -250,7 +254,7 @@ html{
     position: absolute;
     left: 0;
     top: 0;
-    width: 600px;
+    width: 1200px;
     height: 1200px;
     background-color: #36363F;
 }
@@ -281,15 +285,40 @@ html{
 }
 
 .optionEdit{
+    padding: 20px;
+    color: white;
     position: absolute;
     right: 0;
+    top: 0;
     width: 500px;
-    height: 100px;
-    background-color: red;
+    background-color: #28282E;
+    z-index: 2;
 }
 .editHTML{
-    background-color: red;
-    color: black;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: #36363F;
+    color: white;
+    border: none;
+}
+button{
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background-color: #87B569;
+    border-radius: 3px;
+    margin: 0 20px;
+
+    padding: 10px 20px;
+
+    border: none;
+}
+button:active{
+    background-color: #557A3B;
+    border: 1px solid #28282E;
+    padding: 9px 19px;
 }
 
 

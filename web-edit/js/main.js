@@ -1,6 +1,3 @@
-
-//TODO: should not be able to delete spawners
-
 class Element {
   constructor(elmnt) {
 
@@ -117,7 +114,7 @@ class Element {
       this.held=false;
       this.gridSnap();
       if(this.x<delX){
-        if(this.elmnt.spawner!=undefined&&this.elmnt.spawner!=null){
+        if(this.elmnt.spawner!=undefined&&this.elmnt.spawner!=null){//this is not exactly the same as a delete
           this.elmnt.style.zIndex="1";
           this.setPos(this.elmnt.spawner.x,this.elmnt.spawner.y);
           removeOutline();
@@ -126,6 +123,11 @@ class Element {
           removeOutline();
         }
       }
+    }
+  }
+  delete(){
+    if(this.elmnt.spawner!=undefined&&this.elmnt.spawner!=null){
+      this.elmnt.spawner.spawnNew();
     }
   }
   // Method
@@ -410,6 +412,8 @@ function deleteSelected(){
       if(opt.target==dragE[i]){
         closeOptions();
       }
+      console.log(dragE[i]);
+      dragE[i].delete();
       dragE.splice(i,1);
     }
   }
@@ -443,7 +447,7 @@ function closeOptions(){
 function drag(e) {
 
   e = e || window.event;
-  e.preventDefault();
+  //e.preventDefault();
   // calculate the new cursor position:
   posMX = e.clientX + window.scrollX;
   posMY = e.clientY + window.scrollY;
