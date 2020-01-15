@@ -287,7 +287,7 @@ function defocus(){
   var i;
   for (i = 0; i < dragE.length; i++) {
     if(dragE[i].grabClick!=clickNum){
-    dragE[i].setFocus(false);
+      dragE[i].setFocus(false);
     }
   }
 }
@@ -368,6 +368,9 @@ document.onmouseup = mouseUp;
 document.onkeydown = function(evt) {
   evt = evt || window.event;
   if(evt.target==document.getElementsByTagName("BODY")[0]){
+    if(evt.keyCode==27){
+      defocus();
+    }
     if (evt.keyCode == 8||evt.keyCode == 46) {
         deleteSelected();
     }
@@ -402,7 +405,7 @@ function deleteSelected(){
   let opt = document.getElementsByClassName("optionEdit")[0];
 
   for (i = dragE.length-1; i >=0; i--) {
-    if(dragE[i].grabClick==clickNum-1&&clickNum!=0){
+    if(dragE[i].elmnt.classList.contains("selected")){
       for (j = 0; j < allDrag.length; j++) {
         if(dragE[i].elmnt==allDrag[j]){
           allDrag[j].parentNode.removeChild(allDrag[j]);
@@ -412,7 +415,6 @@ function deleteSelected(){
       if(opt.target==dragE[i]){
         closeOptions();
       }
-      console.log(dragE[i]);
       dragE[i].delete();
       dragE.splice(i,1);
     }
