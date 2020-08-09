@@ -1,0 +1,84 @@
+html{
+    background-color: #36363F;
+}
+
+dialog-main{
+	position: absolute;
+	user-drag: none; 
+	user-select: none;
+	padding-top: 30px;
+	overflow: hidden;
+}
+dialog-main>.inner{
+	pointer-events: none;
+    position: absolute;
+    border: 1px dashed #87B569;
+    /*background-color: #28282E;*/
+
+    top:0px;
+    bottom:0px;
+    right:0px;
+    left:0px;
+}
+dialog-mover{
+	position: absolute;
+    border: 1px solid #87B569;
+    border-bottom: none;
+    background-color: #87B56940;
+	right: 0;
+	left: 0;
+	top: 0;
+	height: 30px;
+	cursor: move;
+}
+dialog-mover h1{
+	font-family: 'Rajdhani', sans-serif;
+	font-weight: 400;
+	margin: 0;
+	margin-left: 8px;
+	line-height: 30px;
+	font-size: 25px;
+	color: #87B569;
+}
+dialog-resizer{
+	position: absolute;
+	min-width: 14px;
+	min-height: 14px;
+}
+dialog-resizer.edge{
+	z-index: 2;
+}
+dialog-resizer.corner{
+	z-index: 3;
+	display: flex;
+}
+dialog-resizer.corner div{
+	flex-grow: 1;
+    border: 2px solid #87B569;
+}
+
+textarea{
+    background-color: #36363F;
+}
+
+#selected{
+	width: 200px;
+	height: 200px;
+	background-color: white;
+}
+
+bubble-btn{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+
+	padding: 4px 20px;
+	border-radius: 4px;
+
+	color: white;
+	background-color: #87B569;
+}
+
+.btn-list{
+	padding: 20px;
+}
